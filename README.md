@@ -1,69 +1,126 @@
-# CodeIgniter 4 Application Starter
+# Tasks for Today Management System
 
-## What is CodeIgniter?
+A web-based task management application developed using **CodeIgniter 4**, PHP, and MySQL for the IT0049 – Web System Technologies Technical Summative Assessment 1.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Features
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- **Welcome Page (`/`)** – Displays tasks scheduled for the current date.
+- **Task List (`/tasks`)** – Displays all tasks ordered by date.
+- **Profile (`/profile`)** – Displays the demo user's information.
+- **About (`/about`)** – Provides information about the developer.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Technologies Used
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- PHP 8.2
+- CodeIgniter 4.7.5
+- MySQL
+- phpMyAdmin
+- HTML
+- Git and GitHub
 
-## Installation & updates
+## Requirements
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- PHP 8.2 or a compatible version
+- Composer
+- MySQL or MariaDB
+- XAMPP or another local PHP development environment
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+## Installation and Setup
 
-## Setup
+### 1. Clone the Repository
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+```bash
+git clone https://github.com/kuyagermi18/tsa1.git
+cd tsa1
+```
 
-## Important Change with index.php
+### 2. Install Dependencies
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+```bash
+composer install
+```
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### 3. Create the Database
 
-**Please** read the user guide for a better explanation of how CI4 works!
+1. Start Apache and MySQL using XAMPP.
+2. Open phpMyAdmin at `http://localhost/phpmyadmin`.
+3. Create a database named `tasks_today_db`.
+4. Select the database and click the **Import** tab.
+5. Choose `Database/tasks_today_db.sql` and import the file.
 
-## Repository Management
+The database contains two tables:
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- `tasks` – Stores task titles, statuses, dates, and creation timestamps.
+- `users` – Stores the demo user's account information.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+### 4. Configure the Environment
 
-## Server Requirements
+Copy the `env` template to `.env` if a `.env` file does not exist.
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+Update the following settings in `.env`:
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+```ini
+CI_ENVIRONMENT = development
+app.baseURL = 'http://localhost:8080/'
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+database.default.hostname = localhost
+database.default.database = tasks_today_db
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Adjust the port, username, and password if your local MySQL configuration differs.
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+### 5. Run the Application
+
+From the project directory, execute:
+
+```bash
+php spark serve
+```
+
+Open the local URL displayed in the terminal. For example:
+
+`http://localhost:8080`
+
+If port 8080 is unavailable, CodeIgniter may use another port. Open the URL shown in your terminal.
+
+## Project Structure
+
+```text
+tsa1/
+├── app/
+│   ├── Config/
+│   ├── Controllers/
+│   │   └── TasksController.php
+│   ├── Database/
+│   ├── Models/
+│   │   ├── TaskModel.php
+│   │   └── UserModel.php
+│   └── Views/
+│       ├── welcome_tasks.php
+│       ├── task_list.php
+│       ├── profile.php
+│       └── about.php
+├── Database/
+│   └── tasks_today_db.sql
+├── public/
+├── tests/
+├── writable/
+├── composer.json
+└── spark
+```
+
+## Developer
+
+**Developer:** YOUR FULL NAME
+
+**Course:** BSIT – Cybersecurity
+
+**Subject:** IT0049 – Web System Technologies
+
+## Repository
+
+[GitHub Repository – tsa1](https://github.com/kuyagermi18/tsa1)
